@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/alt-text */
 import '../App.css';
 import logo from './amazon.png';
-import data from './data';
 import { BrowserRouter, Route, Link } from 'react-router-dom'
+import ProductScreen from '../product/ProductScreen';
+import HomeScreen from '../landing/HomeScreen';
 
 function Header() {
     const openMenu = () => {
@@ -19,7 +20,7 @@ function Header() {
               <button onClick={openMenu}>
                 &#9776;
             </button>
-              <a href="index.html"> <img src={logo} height="25"/></a>
+            <Link to="/" > <img src={logo} height="25"/></Link>
             </div>
             <div class="header-links">
               <a href="cart.html">Cart</a>
@@ -41,27 +42,10 @@ function Header() {
             </ul>
           </aside>
           <main className="main">
-        <div className="products">
-          {
-            data.products.map(product =>
-              <li>
-                <div className="product">
-                  <a href={'/product/' + product._id}>
-                    <img className="product-image" src={product.image} alt="product" />
-
-                  </a>
-                  <div className="product-name">
-                    <a href={'/product/' + product._id}>{product.name}</a>
-                  </div>
-                  <div className="product-brand">{product.brand}</div>
-                  <div className="product-price">${product.price}</div>
-                  <div className="product-rating">{product.rating} Stars ({product.numReiews} Reviews)</div>
-                </div>
-              </li>)
-          }
-
-        </div>
-
+          <div className="content">
+            <Route path="/product/:id" component={ProductScreen} />
+            <Route path="/" exact={true} component={HomeScreen} /> 
+          </div>
       </main>
   <footer className="footer">
     All right reserved. ADesignGuy Clone 
